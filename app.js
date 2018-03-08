@@ -1,4 +1,5 @@
 const express        = require('express');
+const path           = require('path');
 const exphbs         = require('express-handlebars');
 const methodOverride = require('method-override');
 const flash          = require('connect-flash');
@@ -35,6 +36,9 @@ app.set('view engine', 'handlebars');
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+// Static folder middleware
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Method override middleware
 app.use(methodOverride('_method'))
@@ -74,7 +78,7 @@ app.get('/about', (req, res)=>{
 app.use('/ideas', ideas)
 app.use('/users', users)
 
-const port = 5000;
+const port = 5001;
 app.listen(port, ()=>{
     console.log(`Server running on port: ${port}`)
 });
