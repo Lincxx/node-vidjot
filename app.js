@@ -1,8 +1,8 @@
-const express = require('express');
-const exphbs = require('express-handlebars');
+const express        = require('express');
+const exphbs         = require('express-handlebars');
 const methodOverride = require('method-override')
-const bodyParser = require('body-parser')
-const mongoose = require('mongoose');
+const bodyParser     = require('body-parser')
+const mongoose       = require('mongoose');
 
 
 // Create an instance
@@ -123,6 +123,16 @@ app.put('/ideas/:id', (req, res)=>{
             res.redirect('/ideas');
         })
     });
+});
+
+// Delete Idea 
+app.delete('/ideas/:id', (req, res)=>{
+    Idea.remove({
+        _id: req.params.id
+    })
+    .then(() =>{
+        res.redirect('/ideas');
+    })
 });
 
 const port = 5000;
